@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-image: url('imagens/dogs-4.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color:#8E5d52;
+    font-family: Arial, sans-serif;
+    color: #8e5d52;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-right: 100px;
+    padding-left: 100px;
+  }
+  
+  .container-fluid{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start ;
+    align-items: center;
+    text-align: right;
+    padding: 15;
+    margin-right: 20px;
+  }
+
+.row{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.mensagem-texto{
+  text-align: right;
+}
+
+.botao{
+  text-align:right;
+  padding: 4px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+  
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004b9a;
+}
+
+.imagem{
+  display: flex;
+  flex-direction: column;
+  align-items:end;
+  justify-content: right;
+  margin-top: 520px;
+}
+
+.rodape-logo{
+  width: 100px;
+  height: 100px;
+}
+
+.rodape-paragrafo{
+  font-family: cursive;
+  font-weight: 400;
+  font-size: 14px;
+  color: black;
+}
+
+
+/* MODELO IPHONE 14 PRO MAX - TELA 430 */
+
+
+@media (max-width: 430px) {
+   
+  body{
+    background-size: 100% 55%;
+    background-color:#8e5d52;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: #FFF2E7;
+  }
+  
+  .row{
+    margin-top: 25px;
+  }
+  
+  .texto-1{
+      font-size: 30px;
+      }
+  
+  .texto-2{
+      font-size: 23px;
+  }
+  
+  .lead{
+      font-size: 16px;
+  }
+  
+  .btn-primary{
+      width: 130px;
+      height: 40px;
+      font-size: 16px;
+      padding: 5px 9px;
+      margin-top: 30px;
+  }
+  
+  .imagem{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    margin-top: 500px;
+    gap: 5px;
+  }
+  
+  .rodape-logo{
+    width: 80px;
+    height: 80px;
+  }
+  
+  .rodape-paragrafo{
+    color: #FFF2E7;
+  }
+  
+  }
+
+
+/* MODELO IPHONE 12 PRO - TELA 390 */
+
+
+@media (max-width: 390px) {
+   
+  body{
+    background-size: 100% 55%;
+    background-color:#8e5d52;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: #FFF2E7;
+  }
+  
+  .row{
+    margin-top: 25px;
+  }
+  
+  .texto-1{
+    font-size: 25px;
+    }
+  
+  .texto-2{
+    font-size: 19px;
+  }
+  
+  .lead{
+    font-size: 14px;
+  }
+  
+  .btn-primary{
+    width: 120px;
+    height: 35px;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin-top: 30px;
+  }
+  
+  .imagem{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    margin-top: 450px;
+    gap: 5px;
+  }
+  
+  .rodape-logo{
+    width: 80px;
+    height: 80px;
+  }
+  
+  .rodape-paragrafo{
+    color: #FFF2E7;
+  }
+  
+  }
+
+
+/* MODELO - SAMSUNG GALAXY S8 - TELA 360 */
+
+
+@media (max-width: 360px) {
+   
+body{
+  background-size: 100% 55%;
+  background-color:#8e5d52;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-right: 5px;
+  padding-left: 5px;
+  color: #FFF2E7;
+  }
+
+.row{
+  margin-top: 25px;
+}
+
+.texto-1{
+    font-size: 22px;
+  }
+
+.texto-2{
+    font-size: 16px;
+}
+
+.lead{
+    font-size: 11px;
+}
+
+.btn-primary{
+  width: 120px;
+  height: 35px;
+  font-size: 14px;
+  padding: 5px 10px;
+  margin-top: 30px;
+}
+
+.imagem{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  margin-top: 378px;
+  gap: 5px;
+}
+
+.rodape-logo{
+  width: 80px;
+  height: 80px;
+}
+
+.rodape-paragrafo{
+  color: #FFF2E7;
+}
+
+}
