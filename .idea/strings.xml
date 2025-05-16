@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PetConnect</string>
+    <string name="add_location">Adicionar Local</string>
+    <string name="view_map">Ver no Mapa</string>
+    <string name="loading_locations">Carregando locais...</string>
+    <string name="load_failed">Falha ao carregar locais</string>
+    <string name="manage_locations">Gerenciar Locais</string>
+    <string name="permission_denied">Permissão negada para acessar localização</string>
+</resources>
