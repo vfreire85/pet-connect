@@ -246,3 +246,23 @@ function getAdoptionAnimals($pdo) {
     $animals = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($animals);
 }
+
+$app->post('/favorites', function (Request $request, Response $response) {
+    $data = $request->getParsedBody();
+    $userId = $request->getAttribute('user_id'); // Obtido do middleware de autenticação
+    
+    // Validação básica
+    if (empty($data['location_id'])) {
+        return $response->withStatus(400)->withJson(['error' => 'location_id é obrigatório']);
+    }
+
+    $db = $this->get('db'); // Assumindo que o PDO está no container DI
+    try {
+        $stmt = $db->prepare("INSERT INTO favorites (user_id, location_id) VALUES (?, ?)");
+        $stmt->execute([$userId, $data['location_id']]);
+        
+        return $response->withJson(['success' => true]);
+    } catch (PDOException $e) {
+        return $response->withStatus(500)->withJson(['error' => 'Erro ao favoritar: ' . $e->getMessage()]);
+    }
+});
