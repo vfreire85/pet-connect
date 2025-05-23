@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tema base -->
+    <style name="Theme.PetConnect" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Personalizações do tema -->
+    </style>
 
-    <style name="Theme.PetConnect" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Tema sem ActionBar -->
+    <style name="Theme.PetConnect.NoActionBar" parent="Theme.PetConnect">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

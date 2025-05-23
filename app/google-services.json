@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "856409777071",
+    "project_id": "pet-connect-1a96e",
+    "storage_bucket": "pet-connect-1a96e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856409777071:android:d97700245617ed5fd2455a",
+        "android_client_info": {
+          "package_name": "com.senacgrupovinteecinco.pet_connect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMTdJZOOSF9UpGKunJghmkNYnkn3N-BrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
