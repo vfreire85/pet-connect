@@ -1,21 +1,25 @@
 <?php
-// /var/www/html/api/db.php
+// Conexão com o banco de dados PostgreSQL
+$host = 'localhost';
+$dbname = 'petconnect';
+$user = 'postgres';
+$pass = '123456'; // Substitua pela sua senha do PostgreSQL
+$dsn = "pgsql:host=$host;dbname=$dbname;port=5432";
 
-$dbHost = 'localhost';
-$dbName = 'petconnect';
-$dbUser = 'api_user'; // Ou um usuário específico com permissões
-$dbPass = '5W;#(m=I'; // Substitua pela senha real
-
+//try {
+    // Conecta ao banco de dados
+  //  $pdo = new PDO($dsn, $user, $pass);
+    //$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//} catch (PDOException $e) {
+  //  echo json_encode(["error" => "Erro ao conectar com o banco de dados: " . $e->getMessage()]);
+    //exit;
+//}
 try {
-    $db = new PDO("pgsql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    
-    // Habilita suporte a JSON no PostgreSQL (se necessário)
-    $db->exec("SET search_path TO public");
-    
-    return $db;
+    $pdo = new PDO($dsn, $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo json_encode(["message" => "Conexão com o banco de dados bem-sucedida!"]);
 } catch (PDOException $e) {
-    error_log("Erro de conexão: " . $e->getMessage());
-    throw new Exception("Falha ao conectar ao banco de dados");
+    echo json_encode(["error" => "Erro ao conectar com o banco de dados: " . $e->getMessage()]);
 }
+return $pdo;
+?>

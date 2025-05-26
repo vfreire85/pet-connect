@@ -58,6 +58,9 @@ switch ($requestMethod) {
                 case 'adoption':
                     addAdoptionAnimal($pdo);
                     break;
+		case 'login':
+		    loginUser($pdo);
+		    break;
             }
         }
         break;
@@ -146,6 +149,79 @@ function addUser($pdo) {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$name, $email, $password]);
     echo json_encode(["message" => "Usuário adicionado com sucesso!"]);
+}
+
+function loginUser($pdo) {
+    $data = json_decode(file_get_contents("php://input"));
+    if (!isset($data->email) || !isset($data->password)) {
+        echo json_encode(["error" => "Email e senha são obrigatórios"]);
+        return;
+    }
+
+    $email = $data->email;
+    $password = $data->password;
+
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && $password === $user['password']) {
+	$user['is_admin'] = $user['email'] === 'admin@email.com' ? true : false;
+        echo json_encode(["message" => "Login bem-sucedido", "user" => $user]);
+    } else {
+        echo json_encode(["error" => "Credenciais inválidas"]);
+    }
+}
+
+function updateUser($pdo) {
+    $data = json_decode(file_get_contents("php://input"));
+    if (!isset($data->id) || !isset($data->password)) {
+        echo json_encode(["error" => "Dados incompletos"]);
+        return;
+    }
+    $id = $data->id;
+    $password = password_hash($data->password, PASSWORD_BCRYPT);
+    $sql = "UPDATE users SET password = ? WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$password, $id]);
+    echo json_encode(["message" => "Senha atualizada com sucesso"]);
+}
+
+function deleteUser($pdo) {
+    // Tenta obter o ID diretamente
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+    }
+    // Se não houver ID, tenta obter pelo e-mail
+    elseif (isset($_GET['email'])) {
+        $email = $_GET['email'];
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            echo json_encode(["error" => "Usuário com e-mail $email não encontrado"]);
+            return;
+        }
+
+        $id = $user['id'];
+    }
+    // Se nenhum parâmetro fornecido
+    else {
+        echo json_encode(["error" => "ID ou e-mail do usuário não fornecido"]);
+        return;
+    }
+
+    // Executa a exclusão
+    $sql = "DELETE FROM users WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$id]);
+
+    if ($stmt->rowCount()) {
+        echo json_encode(["message" => "Usuário deletado com sucesso"]);
+    } else {
+        echo json_encode(["error" => "Nenhum usuário deletado"]);
+    }
 }
 
 // Funções de CRUD para Locais
@@ -246,23 +322,3 @@ function getAdoptionAnimals($pdo) {
     $animals = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($animals);
 }
-
-$app->post('/favorites', function (Request $request, Response $response) {
-    $data = $request->getParsedBody();
-    $userId = $request->getAttribute('user_id'); // Obtido do middleware de autenticação
-    
-    // Validação básica
-    if (empty($data['location_id'])) {
-        return $response->withStatus(400)->withJson(['error' => 'location_id é obrigatório']);
-    }
-
-    $db = $this->get('db'); // Assumindo que o PDO está no container DI
-    try {
-        $stmt = $db->prepare("INSERT INTO favorites (user_id, location_id) VALUES (?, ?)");
-        $stmt->execute([$userId, $data['location_id']]);
-        
-        return $response->withJson(['success' => true]);
-    } catch (PDOException $e) {
-        return $response->withStatus(500)->withJson(['error' => 'Erro ao favoritar: ' . $e->getMessage()]);
-    }
-});
