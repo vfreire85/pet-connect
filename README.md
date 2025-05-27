@@ -12,7 +12,7 @@ VICTOR FREIRE DE CARVALHO - Frontend e integração
 
 Localização da landing page no Github pages: https://vfreire85.github.io/pet-connect-lp/
 
-Vídeo anexo "trabalho pet-connect completo.mp4"
+Vídeo anexo "trabalho pet-connect completo 2.mp4"
 
 OBSERVAÇÕES:
 
